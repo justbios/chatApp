@@ -1,10 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 import { useIdToken } from 'react-firebase-hooks/auth';
-import SingIn from '../screens/Auth/SingIn';
-import Dashboard from '../screens/Dashboard';
+import { NavigationContainer } from '@react-navigation/native';
 import { firebaseAuth } from '../services/firebase';
+import AppNavigation from './AppNavigation';
+import AuthNavigation from './AuthNavigation';
 import { Routes } from './Routes';
 
 export type RootStackParamList = {
@@ -12,24 +12,15 @@ export type RootStackParamList = {
   [Routes.DASHBOARD]: undefined;
 };
 
+export const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const AppNavigator:FC = () => {
-  const [user, loading, error] = useIdToken(firebaseAuth);
-    return (
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-          >
-            {user ?
-            (<Stack.Screen name={Routes.DASHBOARD} component={Dashboard} />)
-            :
-            (<Stack.Screen name={Routes.SING_IN} component={SingIn} />)
-          }
-          </Stack.Navigator>
-    )
+const RootNavigation:FC = () => {
+  const [user] = useIdToken(firebaseAuth);
+   return (
+    <NavigationContainer>
+      {user ? <AppNavigation /> : <AuthNavigation />}
+    </NavigationContainer>
+   )
 }
 
-export default AppNavigator
+export default RootNavigation
