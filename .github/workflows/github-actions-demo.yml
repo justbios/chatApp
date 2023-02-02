@@ -1,0 +1,12 @@
+name: GitHub Actions
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  init:
+    runs-on: macos-latest
+    strategy:
+      matrix: 
+        node-version: [ 19.x ]
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    

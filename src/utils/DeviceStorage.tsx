@@ -5,7 +5,7 @@ const deviceStorage = {
     try {
       await AsyncStorage.setItem(key, value);
     } catch (error) {
-      console.log('AsyncStorage Error: ' + error);
+      console.log(`AsyncStorage Error: ${error}`);
     }
   },
   async getItem(key: string) {
@@ -14,7 +14,8 @@ const deviceStorage = {
     try {
       item = await AsyncStorage.getItem(key);
     } catch (error) {
-      console.log('AsyncStorage Error: ' + error);
+      console.log(`AsyncStorage Error: ${error}`);
+
       item = null;
     }
 
@@ -24,7 +25,7 @@ const deviceStorage = {
     try {
       await AsyncStorage.removeItem(key);
     } catch (error) {
-      console.log('AsyncStorage Error: ' + error);
+      console.log(`AsyncStorage Error: ${error}`);
     }
   },
 };

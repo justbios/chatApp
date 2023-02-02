@@ -7,5 +7,8 @@
 
     /* Completeness */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  },
+  "exclude": [
+    "__tests__/**/*-test.ts"
+]
 }

@@ -14,13 +14,13 @@ export type RootStackParamList = {
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const RootNavigation:FC = () => {
+const RootNavigation: FC = () => {
   const [user] = useIdToken(firebaseAuth);
-   return (
+  return (
     <NavigationContainer>
       {user ? <AppNavigation /> : <AuthNavigation />}
     </NavigationContainer>
-   )
-}
+  );
+};
 
-export default RootNavigation
+export default RootNavigation;
