@@ -1,32 +1,41 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { width } from '../../utils/constants';
+import React, { FC, ReactNode } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { colors } from '../../utils/colors';
+import { Size } from '../../utils/constants';
+import Text from '../Text';
 
 interface IButton {
   onPress: () => void;
   buttonText: string;
+  bg?: string;
+  text?: {
+	color: string;
+	size?: keyof typeof  Size;
+  }
+  icon?: ReactNode
 }
 
-const Button: FC<IButton> = ({ onPress, buttonText }) => {
-  return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.text}>{buttonText}</Text>
-    </TouchableOpacity>
-  );
+const Button: FC<IButton> = ({ onPress, buttonText, bg = colors.green, text, icon }) => {
+	return (
+		<TouchableOpacity style={[styles.container, {backgroundColor: bg}]} onPress={onPress}>
+			{icon && <View style={{marginRight: 10}}>
+				{icon}
+			</View>}
+			<Text color={text?.color} size={text?.size}>{buttonText}</Text>
+		</TouchableOpacity>
+	);
 };
 
 export default Button;
 
 const styles = StyleSheet.create({
-  container: {
-    width: width * 0.8,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 6,
-    backgroundColor: '#FFFFFF',
-  },
-  text: {
-    fontSize: 16,
-  },
+	container: {
+		width: '100%',
+		height: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 20,
+		flexDirection: 'row',
+		marginVertical: 10
+	},
 });

@@ -1,10 +1,8 @@
 export const colors = {
-  backgraund: '#015482',
-  auth: {
-    gray: 'gray',
-    white: 'white',
-  },
-  dashboard: {
-    white: 'white',
-  },
+	background: '#FFFFFF',
+	green: '#37b484',
+	white: '#FFFFFF',
+	gray: 'gray',
+	grayLight: '#f0f0f0',
+	black: '#000'
 };
