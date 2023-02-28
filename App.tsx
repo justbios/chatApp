@@ -33,9 +33,9 @@ CHAT:
 
 
 const App = () => {
-  return (
-    <RootNavigation />
-  )
-}
+	return (
+		<RootNavigation />
+	);
+};
 
 export default App;

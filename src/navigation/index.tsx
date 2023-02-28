@@ -8,19 +8,23 @@ import AuthNavigation from './AuthNavigation';
 import { Routes } from './Routes';
 
 export type RootStackParamList = {
+	// Auth
   [Routes.SING_IN]: undefined;
+  [Routes.SING_UP]: undefined;
+  // App
   [Routes.DASHBOARD]: undefined;
+  [Routes.CHAT]: {name: string; id: string};
 };
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation: FC = () => {
-  const [user] = useIdToken(firebaseAuth);
-  return (
-    <NavigationContainer>
-      {user ? <AppNavigation /> : <AuthNavigation />}
-    </NavigationContainer>
-  );
+	const [user] = useIdToken(firebaseAuth);
+	return (
+		<NavigationContainer>
+			{user ? <AppNavigation /> : <AuthNavigation />}
+		</NavigationContainer>
+	);
 };
 
 export default RootNavigation;

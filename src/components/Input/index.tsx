@@ -1,48 +1,57 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, ReactNode } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../utils/colors';
-import { width } from '../../utils/constants';
 
 interface IInput {
   label?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeText?: (text: string) => void;
   placeholder?: string;
+  icon?: ReactNode
 }
 
-const Input: FC<IInput> = ({ label, onChange, onChangeText, placeholder }) => {
-  return (
-    <View style={styles.inputWrapper}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles.input}
-        onChange={onChange}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-      />
-    </View>
-  );
+const Input: FC<IInput> = ({ label, onChange, onChangeText, placeholder, icon}) => {
+	return (
+		<View style={styles.wrapper}>
+			{label && <Text style={styles.label}>{label}</Text>}
+			<View style={styles.inputWrapper}>
+				{icon && <View style={{marginHorizontal: 10}}>
+					{icon}
+				</View>}
+				<TextInput
+					style={styles.input}
+					onChange={onChange}
+					onChangeText={onChangeText}
+					placeholder={placeholder}
+				/>
+			</View>
+		</View>
+	);
 };
 
 export default Input;
 
 const styles = StyleSheet.create({
-  input: {
-    borderColor: colors.auth.gray,
-    backgroundColor: colors.auth.white,
-    borderWidth: 1,
-    borderRadius: 6,
-    height: 50,
-    padding: 10,
-    fontSize: 16,
-    width: width * 0.8,
-  },
-  label: {
-    color: colors.auth.white,
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  inputWrapper: {
-    marginVertical: 10,
-  },
+	input: {
+		height: 50,
+		fontSize: 16,
+		paddingLeft: 5,
+		width: '100%',
+	},
+	label: {
+		color: colors.black,
+		fontSize: 16,
+		marginBottom: 10,
+	},
+	wrapper: {
+		marginVertical: 10,
+	},
+	inputWrapper: {
+		backgroundColor: colors.grayLight,
+		borderRadius: 40,
+		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: 10
+	},
 });
