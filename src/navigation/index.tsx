@@ -13,6 +13,7 @@ export type RootStackParamList = {
   [Routes.SING_UP]: undefined;
   // App
   [Routes.DASHBOARD]: undefined;
+  [Routes.CHAT]: {name: string; id: string};
 };
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();

@@ -4,4 +4,5 @@ export const enum Routes {
   SING_UP = 'Sing Up',
   // APP
   DASHBOARD = 'Dashboard',
+  CHAT = 'Chat' 
 }

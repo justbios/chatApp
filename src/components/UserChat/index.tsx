@@ -5,8 +5,10 @@ import {
 	Image,
 	ImageSourcePropType,
 	Pressable,
-	Text,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { colors } from '../../utils/colors';
+import Text from '../Text';
 
 interface IUserChatProps {
   name: string;
@@ -29,11 +31,15 @@ const UserChat: FC<IUserChatProps> = ({
 		<Pressable onPress={onPress} style={styles.container}>
 			<View style={{ flexDirection: 'row' }}>
 				<View style={{ alignItems: 'center', justifyContent: 'center' }}>
-					<Image style={styles.userImage} source={userImage} />
+					{userImage ? 
+						<Image style={styles.userImage} source={userImage} /> 
+						:
+						<Icon name='search1' size={20} color={colors.gray} />
+					}
 				</View>
 				<View style={{ marginLeft: 15 }}>
-					<Text>{name}</Text>
-					<Text>{lastMessage}</Text>
+					<Text size='md' textStyles={{fontWeight: 'bold'}}>{name}</Text>
+					<Text size='sm' color={colors.gray} textStyles={{marginTop:4}}>{lastMessage}</Text>
 				</View>
 			</View>
 			<View style={{ alignItems: 'flex-end' }}>
@@ -56,14 +62,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		padding: 10,
 	},
 	messageCount: {
-		backgroundColor: '#2277fe',
+		backgroundColor: colors.green,
 		borderRadius: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingHorizontal: 6,
+		paddingHorizontal: 3,
 		marginTop: 5,
 	},
 	userImage: {

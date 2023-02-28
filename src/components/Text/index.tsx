@@ -12,7 +12,7 @@ interface ITextProps {
 	numberOfLines?: number;
 }
 
-const Text:FC<ITextProps> = ({textStyles, size = 'm', children, color = colors.white, onPress, numberOfLines}) => {
+const Text:FC<ITextProps> = ({textStyles, size = 'm', children, color = colors.black, onPress, numberOfLines}) => {
 	return (
 		<NativeText style={[{fontSize: Size[size], color: color}, textStyles]} onPress={onPress} numberOfLines={numberOfLines}>
 			{children}
