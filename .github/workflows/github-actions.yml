@@ -8,5 +8,10 @@ jobs:
       matrix: 
         node-version: [ 19.x ]
     steps:
-      - run: yarn run lint:fix
+
+    -name: yarn install
+    run: yarn
+
+    - name: lint fix
+    run: yarn run lint:fix
     
