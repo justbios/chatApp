@@ -4,7 +4,7 @@ import { Alert, StyleSheet, View } from 'react-native';
 import Button from '../../components/Buttons';
 import { RootStackParamList } from '../../navigation';
 import { Routes } from '../../navigation/Routes';
-import { firebaseApp, firebaseAuth } from '../../services/firebase';
+import { firebaseAuth } from '../../services/firebase';
 import { colors } from '../../utils/colors';
 import Input from '../../components/Input';
 import Text from '../../components/Text';
@@ -13,8 +13,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
 
 const SingUp: FC<
   NativeStackScreenProps<RootStackParamList, Routes.SING_UP>

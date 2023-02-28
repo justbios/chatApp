@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Button from '../../components/Buttons';
