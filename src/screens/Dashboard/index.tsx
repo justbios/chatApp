@@ -8,33 +8,33 @@ import Text from '../../components/Text';
 import UserChat from '../../components/UserChat';
 import { firebaseAuth } from '../../services/firebase';
 import { colors } from '../../utils/colors';
-import { getFirestore, collection, DocumentData } from 'firebase/firestore';
+import { getFirestore, collection, DocumentData, setDoc, doc, addDoc } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { firebaseApp } from '../../services/firebase';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation';
 import { Routes } from '../../navigation/Routes';
+import { useIdToken } from 'react-firebase-hooks/auth';
 
 const Dashboard: FC<NativeStackScreenProps<RootStackParamList, Routes.DASHBOARD>> = ({navigation}) => {
 	const logOut = () => signOut(firebaseAuth);
-
-
-	
+	const [user] = useIdToken(firebaseAuth);
 	const [value] = useCollection(
-		collection(getFirestore(firebaseApp), 'hooks'),
+		collection(getFirestore(firebaseApp), 'users'),
 		{
 			snapshotListenOptions: { includeMetadataChanges: true },
 		}
 	);
 	
-	const users = value?.docs?.map(el => el.data());
-	console.log(users);
+	const users = value?.docs?.map(el => el.data()).filter(el => el.uid !== user?.uid);
 	
-	const goToChat = (item: DocumentData) => () => navigation.navigate(Routes.CHAT, {name: item.name, id: item.id});
+	const goToChat = (item: DocumentData) => () => {
+		navigation.navigate(Routes.CHAT, {name: item.name, id: item.uid});
+	};
 
 	return (
 		<SafeAreaView style={styles.wrapper}>
-			<StatusBar barStyle="light-content" />
+			<StatusBar barStyle="dark-content" />
 			<View style={styles.container}>
 				<Text size='lg' textStyles={styles.title}>Chats</Text>
 				<Input placeholder='Search' icon={<Icon name='search1' size={20} color={colors.gray} />} />

@@ -20,10 +20,10 @@ const AuthWrapper: FC<PropsWithChildren<IAuthWrapperProps>> = ({title, subTitle,
 				<StatusBar translucent backgroundColor="transparent"  barStyle='light-content' />
 				<View style={styles.header}>
 					<View style={styles.title}>
-						<Text size='lg'>
+						<Text size='lg' color={colors.white}>
 							{title}
 						</Text>
-						<Text size='m' textStyles={{marginTop: 10}}>
+						<Text size='m' textStyles={{marginTop: 10}} color={colors.white}>
 							{subTitle}
 						</Text>
 					</View>

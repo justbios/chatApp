@@ -7,14 +7,15 @@ interface IInput {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeText?: (text: string) => void;
   placeholder?: string;
-  icon?: ReactNode
+  icon?: ReactNode;
+  style?: StyleMedia
 }
 
-const Input: FC<IInput> = ({ label, onChange, onChangeText, placeholder, icon}) => {
+const Input: FC<IInput> = ({ label, onChange, onChangeText, placeholder, icon, style}) => {
 	return (
 		<View style={styles.wrapper}>
 			{label && <Text style={styles.label}>{label}</Text>}
-			<View style={styles.inputWrapper}>
+			<View style={[styles.inputWrapper, style]}>
 				{icon && <View style={{marginHorizontal: 10}}>
 					{icon}
 				</View>}
