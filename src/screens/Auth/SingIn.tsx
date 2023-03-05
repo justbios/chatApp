@@ -24,8 +24,6 @@ const SingIn: FC<
 	const [signInWithGoogle] = useSignInWithGoogle(firebaseAuth);
 	const goToSingUp = () => navigation.navigate(Routes.SING_UP);
 
-	//regex for email
-
 	const onSingIn = async () => {
 		try {
 			return await signInWithEmailAndPassword(firebaseAuth, email, password);

@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { colors } from '../../utils/colors';
 import { Size } from '../../utils/constants';
 import Text from '../Text';
@@ -13,15 +13,17 @@ interface IButton {
 	size?: keyof typeof  Size;
   }
   icon?: ReactNode
+  loading?: boolean;
 }
 
-const Button: FC<IButton> = ({ onPress, buttonText, bg = colors.green, text, icon }) => {
+const Button: FC<IButton> = ({ onPress, buttonText, bg = colors.green, text, icon, loading }) => {
 	return (
 		<TouchableOpacity style={[styles.container, {backgroundColor: bg}]} onPress={onPress}>
+			
 			{icon && <View style={{marginRight: 10}}>
 				{icon}
 			</View>}
-			<Text color={text?.color} size={text?.size}>{buttonText}</Text>
+			{loading ? <ActivityIndicator /> : <Text color={text?.color} size={text?.size}>{buttonText}</Text>}
 		</TouchableOpacity>
 	);
 };

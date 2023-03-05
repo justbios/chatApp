@@ -4,7 +4,7 @@ import { Alert, StyleSheet, View } from 'react-native';
 import Button from '../../components/Buttons';
 import { RootStackParamList } from '../../navigation';
 import { Routes } from '../../navigation/Routes';
-import { firebaseAuth } from '../../services/firebase';
+import { firebaseApp, firebaseAuth } from '../../services/firebase';
 import { colors } from '../../utils/colors';
 import Input from '../../components/Input';
 import Text from '../../components/Text';
@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import {doc, getFirestore, setDoc } from 'firebase/firestore';
 
 const SingUp: FC<
   NativeStackScreenProps<RootStackParamList, Routes.SING_UP>
@@ -20,7 +21,7 @@ const SingUp: FC<
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [name, setName] = useState<string>('');
-	const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(firebaseAuth);
+	const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(firebaseAuth);
 	const [updateProfile] = useUpdateProfile(firebaseAuth);
 
 
@@ -29,9 +30,13 @@ const SingUp: FC<
 	const RegisterUser = async () => {
 		try {
 			const user = await createUserWithEmailAndPassword(email, password);
-			console.log(user, 'USERRRR');
 			if(user) {
 				await updateProfile({displayName: name});
+				setDoc(doc(getFirestore(firebaseApp), 'users', user.user.uid), {
+					name: name,
+					email: user.user.email,
+					uid: user.user.uid
+				});
 			}
 		} catch (e) {
 			return Alert.alert('bad credentials');
@@ -60,7 +65,7 @@ const SingUp: FC<
 					onChangeText={setPassword} 
 				/>
 				<View style={styles.singInButton}>
-					<Button onPress={RegisterUser} buttonText="Sing in" />
+					<Button onPress={RegisterUser} buttonText="Sing up" loading={loading} />
 				</View>
 				<View style={styles.connectWith}>
 					<Text size='lg' color={colors.gray}>Or connect with</Text>
